@@ -8,11 +8,11 @@ on:
 jobs:
   call_workflow:
     name: Run Security Scan Workflow
-    if: ${{ github.repository_owner == 'ballerina-platform' }}
+    if: ${{ github.repository_owner == 'CharanaManawathilake' }}
     permissions:
       contents: read
       security-events: write
       actions: read
-    uses: ballerina-platform/ballerina-library/.github/workflows/security-scan-template.yml@main
+    uses: CharanaManawathilake/ballerina-library/.github/workflows/security-scan-template.yml@use-scan-ballerina-action
     with:
       additional-build-flags: "-x test"
