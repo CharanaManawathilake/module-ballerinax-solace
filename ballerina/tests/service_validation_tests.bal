@@ -14,6 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/scan;
 import ballerina/test;
 
 // ========================================
@@ -28,6 +29,7 @@ function testValidationServiceTransportWindowSizeTooHigh() returns error? {
         queueName: BINDING_VALIDATION_QUEUE,
         transportWindowSize: 256
     } service object {
+        @scan:Suppress {rules: ["ballerina:2"], reason: "Test service only needs a matching onMessage signature; the payload is intentionally unused"}
         remote function onMessage(Message message) returns error? {
         }
     };
@@ -46,6 +48,7 @@ function testValidationServiceAckThresholdTooHigh() returns error? {
         queueName: BINDING_VALIDATION_QUEUE,
         ackThreshold: 76
     } service object {
+        @scan:Suppress {rules: ["ballerina:2"], reason: "Test service only needs a matching onMessage signature; the payload is intentionally unused"}
         remote function onMessage(Message message) returns error? {
         }
     };
@@ -64,6 +67,7 @@ function testValidationServiceAckTimerTooHigh() returns error? {
         queueName: BINDING_VALIDATION_QUEUE,
         ackTimer: 2.0
     } service object {
+        @scan:Suppress {rules: ["ballerina:2"], reason: "Test service only needs a matching onMessage signature; the payload is intentionally unused"}
         remote function onMessage(Message message) returns error? {
         }
     };
