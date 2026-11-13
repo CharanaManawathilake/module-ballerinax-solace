@@ -14,6 +14,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/scan;
+
 # The Solace service type attached to a `solace:Listener` for asynchronous (push-based) consumption.
 #
 # An attached service must declare a remote `onMessage` method and may optionally declare an
@@ -28,6 +30,7 @@
 # type; declaring the base `solace:Message` type yields the raw payload as `anydata`.
 # The subscription (queue or topic) and flow options are supplied via the
 # `@solace:ServiceConfig` annotation on the service.
+@scan:Suppress {rules: ["ballerina:6"], reason: "Service type is a marker type for the listener; isolation is enforced on the attached services"}
 public type Service distinct service object {
 };
 
@@ -355,7 +358,9 @@ public type Message record {|
     # (e.g. `record {|*Message; string payload;|}`) to have the payload data-bound
     # into the declared type
     anydata payload;
-    # Delivery mode for the message (DIRECT, PERSISTENT, or NON_PERSISTENT)
+    # Delivery mode for the message (DIRECT or PERSISTENT). `MessageProducer->send` accepts both modes, whereas
+    # `MessageProducer->sendAwaitAcknowledgement` accepts only PERSISTENT, as the broker does not acknowledge DIRECT
+    # messages
     DeliveryMode deliveryMode = DIRECT;
     # Message priority (0-9, where 9 is the highest)
     int priority?;

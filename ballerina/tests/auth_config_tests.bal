@@ -15,6 +15,7 @@
 // under the License.
 
 import ballerina/http;
+import ballerina/scan;
 import ballerina/test;
 
 // ========================================
@@ -23,6 +24,7 @@ import ballerina/test;
 
 @test:Config {groups: ["consumer", "auth", "negative"]}
 isolated function testConsumerOidcTokenAuthIsRecognized() returns error? {
+    @scan:Suppress {rules: ["ballerina:13"], reason: "Dummy credential used only to verify auth config handling in a negative test"}
     MessageConsumer|error consumer = new (BROKER_URL, {
         messageVpn: MESSAGE_VPN,
         auth: {
@@ -47,6 +49,7 @@ isolated function testConsumerOidcTokenAuthIsRecognized() returns error? {
 // createAuthConfig() branch that was fixed for the OIDC case.
 @test:Config {groups: ["consumer", "auth", "negative"]}
 isolated function testConsumerOAuth2AccessTokenAuthIsRecognized() returns error? {
+    @scan:Suppress {rules: ["ballerina:13"], reason: "Dummy credential used only to verify auth config handling in a negative test"}
     MessageConsumer|error consumer = new (BROKER_URL, {
         messageVpn: MESSAGE_VPN,
         auth: {

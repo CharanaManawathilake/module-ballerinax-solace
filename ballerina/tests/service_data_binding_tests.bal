@@ -15,6 +15,7 @@
 // under the License.
 
 import ballerina/lang.runtime;
+import ballerina/scan;
 import ballerina/test;
 
 // ========================================
@@ -499,6 +500,7 @@ Service mismatchStringExpectedService = @ServiceConfig {
     queueName: BINDING_SVC_MISMATCH_STRING_QUEUE,
     ackMode: AUTO_ACK
 } service object {
+    @scan:Suppress {rules: ["ballerina:2"], reason: "Test service only needs a matching onMessage signature; the payload is intentionally unused"}
     remote function onMessage(record {|*Message; string payload;|} message) returns error? {
     }
     remote function onError(Error err) returns error? {
@@ -532,6 +534,7 @@ Service mismatchIntExpectedService = @ServiceConfig {
     queueName: BINDING_SVC_MISMATCH_INT_QUEUE,
     ackMode: AUTO_ACK
 } service object {
+    @scan:Suppress {rules: ["ballerina:2"], reason: "Test service only needs a matching onMessage signature; the payload is intentionally unused"}
     remote function onMessage(record {|*Message; int payload;|} message) returns error? {
     }
     remote function onError(Error err) returns error? {
@@ -565,6 +568,7 @@ Service mismatchRecordExpectedService = @ServiceConfig {
     queueName: BINDING_SVC_MISMATCH_RECORD_QUEUE,
     ackMode: AUTO_ACK
 } service object {
+    @scan:Suppress {rules: ["ballerina:2"], reason: "Test service only needs a matching onMessage signature; the payload is intentionally unused"}
     remote function onMessage(record {|*Message; DataBindingIncompatibleRecord payload;|} message) returns error? {
     }
     remote function onError(Error err) returns error? {
