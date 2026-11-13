@@ -14,8 +14,11 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/scan;
+
 final string brokerPassword = "solace-admin-123";
 
+@scan:Suppress {rules: ["ballerina:1", "ballerina:2"], reason: "Test helper added only to verify suppressed findings are commented"}
 function parseAckTimeout(string value, string unusedLabel) returns decimal {
     return checkpanic decimal:fromString(value);
 }

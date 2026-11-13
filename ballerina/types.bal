@@ -14,6 +14,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/scan;
+
 # The Solace service type attached to a `solace:Listener` for asynchronous (push-based) consumption.
 #
 # An attached service must declare a remote `onMessage` method and may optionally declare an
@@ -28,6 +30,7 @@
 # type; declaring the base `solace:Message` type yields the raw payload as `anydata`.
 # The subscription (queue or topic) and flow options are supplied via the
 # `@solace:ServiceConfig` annotation on the service.
+@scan:Suppress {rules: ["ballerina:6"], reason: "Service type is a marker type for the listener; isolation is enforced on the attached services"}
 public type Service distinct service object {
 };
 
